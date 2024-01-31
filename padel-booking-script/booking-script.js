@@ -20,7 +20,12 @@ async function login(page) {
 
     // Wait for navigation to complete
     await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 120000 });
+
+    // Navigate back to the same URL
+    await page.goto(loginUrl, { waitUntil: 'domcontentloaded' });
 }
+
+
 
 async function checkAvailableCourts(page, date) {
     // Navigate to the target page with the specified date
@@ -66,7 +71,7 @@ async function navigateToNextDay(page) {
             const activeDay = document.querySelector('.datepicker-days .day.active');
             return activeDay && activeDay.getAttribute('data-day') !== null;
         });
-
+a
         // Optional: Wait for a short additional time to ensure the calendar is fully updated
         await page.waitForTimeout(1000);
     } catch (error) {
